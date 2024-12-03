@@ -28,4 +28,11 @@ jobs:
 
     - name: Run tests with pytest
       run: |
-        pytest  # This runs your tests using pytest
+        pytest -v tests/  # The -v flag gives verbose output and shows more details for each test case
+
+    - name: Upload pytest results (Optional)
+      if: failure()  # This step runs only if the tests fail
+      uses: actions/upload-artifact@v2
+      with:
+        name: pytest-results
+        path: test-results.xml  # Path to your pytest results (if generated)
